@@ -1,10 +1,11 @@
 import express from "express";
-import {welcome} from '../controllers/auth.js';
+import * as auth from '../controllers/auth.js';
 
 const router = express.Router();
 
 // get(path,callback-function) to send request to localhost:8000
-router.get("/api",welcome);
+router.get("/",auth.welcome);
+router.post("/pre-register",auth.preRegister);
 
 
 export default router;

@@ -11,7 +11,7 @@ const PORT = 8000;
 
 //Database connectivity through Mongoose
 mongoose.connect(DATABASE)
-.then(()=>{console.log("Database connected successlly..")})
+.then(()=>{console.log("Database connected successfully..")})
 .catch((err)=>{console.log(err)});
 
 // middlewares
@@ -20,7 +20,7 @@ app.use(morgan("dev"));
 app.use(cors());
 
 // Route middlewares
-app.use('/',router);
+app.use('/api',router);
 
 
 

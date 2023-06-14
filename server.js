@@ -1,35 +1,36 @@
-// https://github.com/shubham3938/Realist-App.git
-
 // import required packages
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import mongoose from 'mongoose';
+import { DATABASE } from './config.js';
+import router from './routes/auth.js';
 
 const app = express();
 const PORT = 8000;
+
+//Database connectivity through Mongoose
+mongoose.connect(DATABASE)
+.then(()=>{console.log("Database connected successlly..")})
+.catch((err)=>{console.log(err)});
 
 // middlewares
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
 
-// get(path,callback-function) to send request to localhost:8000
-app.get("/api",(req,res)=>{
-    res.json({
-        name:"shubham",
-        surname:"shingare",
-        address:"kolhapur",
-    })
-});
+// Route middlewares
+app.use('/',router);
+
 
 
 // listen() to start server & to check server works properly with req on port:8000
 app.listen(PORT,(error)=>{
     if(!error)
     {
-        console.log("Server started successfully...hh");     
+        console.log("Server started successfully..");     
     }
     else{
-        console.log("Server not working properly..." + error);     
+        console.log("Server not working properly.." + error);     
     }
 });
